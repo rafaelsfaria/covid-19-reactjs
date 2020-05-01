@@ -1,41 +1,37 @@
 import React from 'react';
-import { Card, Typography, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import styles from './Cards.module.css';
-import CountUp from 'react-countup';
-import cx from 'classnames';
-import { ICardData } from '../../interfaces'
+import { ICardData } from '../../interfaces';
+import CardComponent from './CardComponent/CardComponent';
 
 const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate }} : ICardData): any => {
-  if (!confirmed) {
-    return 'Loading ...';
-  }
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">
-        <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.infected)}>
-          <Typography color="textSecondary" gutterBottom>Infected</Typography>
-          <Typography variant="h5">
-            <CountUp start={0} end={confirmed} duration={2.5} separator="," />  
-          </Typography>
-          <Typography color="textSecondary">{new Date(lastUpdate).toDateString()}</Typography>
-          <Typography variant="body2">Number of active cases of COVID-19</Typography>
-        </Grid>
-        <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.recovered)}>
-          <Typography color="textSecondary" gutterBottom>Recovered</Typography>
-          <Typography variant="h5">
-            <CountUp start={0} end={recovered} duration={2.5} separator="," />  
-          </Typography>
-          <Typography color="textSecondary">{new Date(lastUpdate).toDateString()}</Typography>
-          <Typography variant="body2">Number of recoveries cases of COVID-19</Typography>
-        </Grid>
-        <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.deaths)}>
-          <Typography color="textSecondary" gutterBottom>Deaths</Typography>
-          <Typography variant="h5">
-            <CountUp start={0} end={deaths} duration={2.5} separator="," />  
-          </Typography>
-          <Typography color="textSecondary">{new Date(lastUpdate).toDateString()}</Typography>
-          <Typography variant="body2">Number of deaths caused by COVID-19</Typography>
-        </Grid>
+        <CardComponent
+          title={'Infected'}
+          end={confirmed}
+          lastUpdate={lastUpdate}
+          cardStyle={styles.card}
+          typeStyle={styles.infected}
+          body={'Number of active cases of COVID-19'}
+          />
+        <CardComponent
+          title={'Recovered'}
+          end={recovered}
+          lastUpdate={lastUpdate}
+          cardStyle={styles.card}
+          typeStyle={styles.recovered}
+          body={'Number of recoveries cases of COVID-19'}
+          />
+        <CardComponent
+          title={'Deaths'}
+          end={deaths}
+          lastUpdate={lastUpdate}
+          cardStyle={styles.card}
+          typeStyle={styles.deaths}
+          body={'Number of deaths caused by COVID-19'}
+          />
       </Grid>
     </div>
   )

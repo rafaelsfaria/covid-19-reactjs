@@ -43,3 +43,12 @@ export interface IChartData {
   },
   country: string
 }
+
+export interface ICardComponent {
+  end: number,
+  lastUpdate: string,
+  cardStyle: string,
+  typeStyle: string,
+  title: string,
+  body: string
+}
