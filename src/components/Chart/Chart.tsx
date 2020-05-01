@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchDailyData } from '../../api';
+import { CircularProgress } from '@material-ui/core';
 import { Bar, Line } from 'react-chartjs-2';
 import styles from './Chart.module.css';
 import { IChartData, IModifiedData } from '../../interfaces';
@@ -33,7 +34,7 @@ const Chart = ({ data: { confirmed, deaths, recovered }, country }: IChartData) 
             fill: true,
           }]
         }} />
-    ) : null
+    ) : <CircularProgress />
   );
 
   const barChart = (
@@ -56,7 +57,7 @@ const Chart = ({ data: { confirmed, deaths, recovered }, country }: IChartData) 
           title: { display: true, text: `Current state in ${country}.` }
         }}
       />
-    ) : 'Loading Chart...'
+    ) : <CircularProgress />
   );
 
   return (

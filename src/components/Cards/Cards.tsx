@@ -6,7 +6,7 @@ import CardComponent from './CardComponent/CardComponent';
 
 const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate }} : ICardData): any => {
   if (!confirmed) {
-    return 'Loading ...'
+    return null
   }
   return (
     <div className={styles.container}>
