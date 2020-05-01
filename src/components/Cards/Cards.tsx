@@ -5,6 +5,9 @@ import { ICardData } from '../../interfaces';
 import CardComponent from './CardComponent/CardComponent';
 
 const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate }} : ICardData): any => {
+  if (!confirmed) {
+    return 'Loading ...'
+  }
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">
