@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { fetchDailyData } from '../../api';
 import { Bar, Line } from 'react-chartjs-2';
 import styles from './Chart.module.css';
+import { IChartData, IModifiedData } from '../../interfaces';
 
-const Chart = ({ data: { confirmed, deaths, recovered }, country }) => {
-  const [dailyData, setDailyData] = useState([]);
+const Chart = ({ data: { confirmed, deaths, recovered }, country }: IChartData) => {
+
+  const [dailyData, setDailyData] = useState<Array<IModifiedData>>([]);
 
   useEffect(() => {
     const fetchAPI = async () => {
-      setDailyData(await fetchDailyData());
+      const newDailyData = await fetchDailyData()
+      setDailyData(newDailyData);
     }
     fetchAPI();
   }, []);
@@ -46,7 +49,7 @@ const Chart = ({ data: { confirmed, deaths, recovered }, country }) => {
               'rgba(0, 255, 0, 0.5)',
               'rgba(255, 0, 0, 0.5)'
             ],
-            data: [confirmed.value, recovered.value, deaths.value]
+            data: [confirmed, recovered, deaths]
           }]
         }}
         options={{
