@@ -7,7 +7,6 @@ import { IChartData, IModifiedData } from '../../interfaces';
 const Chart = ({ data: { confirmed, deaths, recovered }, country }: IChartData) => {
 
   const [dailyData, setDailyData] = useState<Array<IModifiedData>>([]);
-
   useEffect(() => {
     const fetchAPI = async () => {
       const newDailyData = await fetchDailyData()
@@ -57,7 +56,7 @@ const Chart = ({ data: { confirmed, deaths, recovered }, country }: IChartData) 
           title: { display: true, text: `Current state in ${country}.` }
         }}
       />
-    ) : null
+    ) : 'Loading Chart...'
   );
 
   return (
